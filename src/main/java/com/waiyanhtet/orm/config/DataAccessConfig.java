@@ -15,6 +15,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import jakarta.persistence.EntityManagerFactory;
+
 @Configuration
 @ComponentScan(basePackages = {"com.waiyanhtet.orm.repo"})
 @EnableTransactionManagement
@@ -44,8 +46,8 @@ public class DataAccessConfig {
 	}
 	
 	@Bean
-	JpaTransactionManager txManager() {
-		return new JpaTransactionManager();
+	JpaTransactionManager txManager(EntityManagerFactory emf) {
+		return new JpaTransactionManager(emf);
 	}
 
 }
